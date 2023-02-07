@@ -4,11 +4,11 @@ import React from "react";
 import tw from "tailwind-react-native-classnames";
 import NavOptions from "../components/NavOptions";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { GOOGLE_MAP_KEY } from "@env";
+ import { GOOGLE_MAP_KEY } from "@env";
+
 const HomeScreen = () => {
   return (
     <SafeAreaView style={[tw`bg-white h-full`]}>
-   
       <View style={tw`p-5`}>
         <Image
           style={{
@@ -20,27 +20,32 @@ const HomeScreen = () => {
         />
       </View>
       <GooglePlacesAutocomplete
-      placeholder='Search'
-      styles={{
-        container:{
-          flex: 0
-        },
-        textInput:{
-          fontSize: 18
-        },
-      }}
-      
-      minLength={2}
-      query={{
-        key: 'AIzaSyBwLZVU1pTsEjIfoYVGmIEqPf2FtVTK4NE',
-        language: 'en',
-      }}
-      nearbyPlacesAPI="GooglePlacesSearch"
-      debounce={200}
-    />
+        placeholder='Where is ..'
+        styles={{
+          container: {
+            flex: 0,
+          },
+          textInput: {
+            fontSize: 18,
+          },
+        }}
+        keyboardShouldPersistTaps="handled"
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails r= true
+          // console.log(data);
+          // console.log(details);
+        }}
+        query={{
+          key: GOOGLE_MAP_KEY,
+          language: 'en',
+        }}
+        minLength={2}
+        enablePoweredByContainer={false}
+        nearbyPlacesAPI="GooglePlacesSearch"
+        debounce={200}
+      />
       <NavOptions />
       <StatusBar backgroundColor="black" translucent />
-      
     </SafeAreaView>
   );
 };
